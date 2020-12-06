@@ -166,13 +166,10 @@ for (var in 1:length(variance)){
     new_test = t(t(Eigenfaces)%*%t(test.scaled)) 
     labeled = cbind(train.labels, new_train)
     
-    min = PCA.train$D_VarianceExplained # 24
-    
     fish = Fisher(new_train, labeled, classes, variance[var])
     
     train.fisher = new_train%*%fish$eigenvector_fisher
-    train.fisher = as.data.frame((train.fisher))
-    test.fisher = as.data.frame(new_test%*%fish$eigenvector_fisher)
+    test.fisher = new_test%*%fish$eigenvector_fisher
     
     Img = array(train.scaled[i,], dim(Im)) 
     imageShow(Img)
